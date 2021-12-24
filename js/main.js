@@ -3,7 +3,7 @@
 Using $(this) to make it general for all divs
 i could use animate with css but would make one for each div as the filling color changes
 */
- $('.features .content').hover(function () {
+$('.features .content').hover(function () {
     let x = $(this).children('div.preButton').children('button.btn').css('border-left-color');
     $(this).children('div.preButton').children('span').css({'width':'100px','background-color':x})
     
@@ -26,3 +26,9 @@ function () {
         }
     
 )*/
+$('#others').click(function () {
+    $('#other-links').fadeToggle('slow')
+}
+
+)
+

@@ -67,6 +67,14 @@ body{
 .nav-item:hover{ background-color: rgb(245, 231, 231)}
 .navbar-light .navbar-nav .nav-link:hover {font-size: 20px; color: rgb(25, 161, 240); }
 /*navbar*/
+
+/* other links */
+.other-links .container{position: relative;;padding: 20px;;color: var(--main-color);top: -10px;font-weight: bold;display: none;}
+.other-links .container{background-color: white;}
+.links{border-bottom: 1px solid #777;margin-left: 20px;padding: 20px;}
+.other-links img{width: 100%;}
+
+/* other links */
 /*landing section*/
 .overlay{
     content: "";
