@@ -23,16 +23,19 @@ body{
     margin-right: auto;
   }
   /* Small */
+ 
   @media (min-width: 768px) {
     .container {
       width: 750px;
     }
+   
   }
   /* Medium */
   @media (min-width: 992px) {
     .container {
       width: 970px;
     }
+    
   }
   /* Large */
   @media (min-width: 1200px) {
@@ -64,6 +67,14 @@ body{
 .nav-item:hover{ background-color: rgb(245, 231, 231)}
 .navbar-light .navbar-nav .nav-link:hover {font-size: 20px; color: rgb(25, 161, 240); }
 /*navbar*/
+
+/* other links */
+.other-links .container{position: relative;;padding: 20px;;color: var(--main-color);top: -10px;font-weight: bold;display: none;}
+.other-links .container{background-color: white;}
+.links{border-bottom: 1px solid #777;margin-left: 20px;padding: 20px;}
+.other-links img{width: 100%;}
+
+/* other links */
 /*landing section*/
 .overlay{
     content: "";
@@ -178,7 +189,8 @@ border: 2px solid black;text-transform: uppercase;text-align: center;max-width: 
 /* This is a style for repeated divs */
 .gallery .image::before{
     content: "";
-    background-color: rgb(155 148 148/0.2);
+    background-color: rgba(136, 127, 127,0.2);
+    opacity: 0.2;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -206,78 +218,104 @@ border: 2px solid black;text-transform: uppercase;text-align: center;max-width: 
 
 
 /* Features section */
-.features{
-    margin: var(--main-margin) 0px 50px 0px;text-align: center;
-}
-div.preButton{position: relative;height:48px;left: 125px;z-index: -1;width: 0px;
-top: 49px;text-align: center;color: rgb(30, 12, 136);border-radius: 5%;
-;font-size: 20px;font-weight: bold;line-height: 2.2;opacity: 1;}
-.features .content{padding-bottom: 25px ;justify-content: center;border: 1px solid #777;}
-.features .content .image{position: relative;}
-.features .content img{max-width: 100%;}
-.features .content .image::before{
-    content: "";
-    position: absolute;
-    background-color: #f44036;
-    opacity: 0.5;
-    width: 100%;
-    height: 100%;
 
-}
-.features .content .image::after{
-    content: "";
-    position: absolute;
-    background-color: white;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%) skewY(-15deg);
-    transform-origin: top right;
-    width: 100%;
-    height: 50%;
 
-}
-.features .content:hover .image::after{
-    animation: mirror 0.3s forwards;
-}
 @keyframes mirror {
     0%{top: 50%;left: 50%; transform: translate(-50%) skewY(-20deg);}
     100%{top: 80%;left: 50%;transform:translate(-50%) skewY(15deg);transform-origin: top right;}
 }
-.features .content h1{font-weight: bolder; border-bottom: 4px solid  #f44036;;max-width: fit-content;position: relative;margin: 20px auto 20px;font-size: 35px;padding-bottom: 10px;}
-.features button{z-index: -1; font-size: 20px; background-color: aliceblue;width: 100px;height: 50px;font-weight: bold;position: relative;color: black;}
 
-.features button.btn-primary {border: 2px solid red;color: #f44036;}
-.features button.btn-secondary {border: 2px solid #009688;color:#009688}
-.features button.btn-danger {border: 2px solid green;color: green;}
-
-
-
-.features button::before{
+%before-button{
     content: "";
     position: absolute;
-    background-color: #f44036;
-    left: -20px;
-    top: 0;
-    width: 20px;
+    top:0;
+    left: 0;
+    width: 0px;
     height: 100%;
-    z-index: 1;
-    
+    transition: var(--main-transition);
+    z-index: -1;
+   
 }
-.features .content:hover button::before{
-    animation: filling 0.3s 1 forwards;
+.features{
+    margin: var(--main-margin) 0px 50px 0px;text-align: center;
+.content{ 
+        padding-bottom: 25px ;justify-content: center;border: 1px solid #777;
+        h1{
+        font-weight: bolder; border-bottom: 4px solid  #f44036;;max-width: fit-content;position: relative;margin: 20px auto 20px;font-size: 35px;padding-bottom: 10px;
+        }
+        :hover .image::after{
+            animation: mirror 0.3s forwards;
+        }
+    }
+    .image{
+        position: relative;overflow: hidden;
+        img{width: 100%;}
+        &::before{
+            content: "";
+            position: absolute;
+            background-color: #f44036;
+            opacity: 0.5;
+            width: 100%;
+            height: 100%;
+        
+        }
+        &::after{
+        content: "";
+        position: absolute;
+        background-color: white;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%) skewY(-15deg);
+        transform-origin: top right;
+        width: 100%;
+        height: 65%;
+         }
+        }
+    button{ font-size: 20px; background-color: aliceblue;width: 100px;height: 50px;font-weight: bold;position: relative;z-index: -1;}
+    button.btn-danger{
+        border: 2px solid red; color: #f44036; transition: 1s;position: relative;
+        &::before{
+            @extend %before-button;
+            background-color: red;
+            
+        }
+    }
+    button.btn-secondary {border: 2px solid #009688;color:#009688;
+        &::before{
+        @extend %before-button;
+        background-color: #009688;
+        }
+    }
+    button.btn-primary {border: 2px solid green;color: green;
+    &::before{
+        @extend %before-button;
+        background-color:green;
+        }   
+    }
+    .quality:hover{ 
+        button.btn-danger::before{width: 100%;z-index: -1;}
+        button{color: white;z-index: 1;}
+        }
+    .time:hover{ 
+        button.btn-secondary::before{width: 100%;z-index: -1;}
+        button{color: white;z-index: 1;}
+        }
+    .passion:hover{ 
+        button.btn-primary::before{width: 100%;z-index: -1;}
+        button{color: white;z-index: 1;}
+        }   
 }
 
-@keyframes fillings {
-    0%{width: 0px; left: 0;}
-    100%{width: 100%;left: 0;}
-}
-.features .content:hovser .btns {color: white;z-index: 1;}
-/* end Features section */
 
+
+/* .preButton{position: relative;} */
+/* .features .pre{position: absolute;width: 0px;height: 48px;transition: var(--main-transition);z-index:1;border-radius: 5%;font-size: 20px;font-weight: bold;line-height: 2.2;color: white;z-index: 1;}
+ *//* end Features section */
 
 /* Testominals section */
-.testominals .imgHolder{width: 120px;height: 120px;background-color:  var(--section-color);border-radius: 50%;justify-content: center;align-items: center;display: flex;position: relative;left: 250px;top: 60px;}
-.testominals .content img{width: 100px;height: 100px;border-radius: 50%;}
+.testominals .content{position: relative;}
+.testominals .imgHolder{width: 100px;height: 100px;background-color:  var(--section-color);border-radius: 50%;justify-content: center;align-items: center;display: flex;position: absolute;right: -5px;top: -30px;}
+.testominals .content img{width: 80px;height: 80px;border-radius: 50%;}
 .testominals .rate .filled{color: gold;}
 .testominals .text{background-color: white;padding: 20px;}
 .testominals .text h4{font-weight: bold;}
@@ -393,7 +431,12 @@ top: 49px;text-align: center;color: rgb(30, 12, 136);border-radius: 5%;
 
 /* skills section */
 
+.skills  .holder{display: flex;justify-content: space-around;flex-direction: column;height: 100%;}
 .skills img{width: 100%;}
+.skills .bar-details{height: 30px;position: relative;}
+.skills .progress{height: 30px}
+.skills .bar-details span{position: absolute;left: 0px;top: -40px; font-size: 15px;font-weight: bold;color: black;}
+.skills .bar-details p{position: absolute;right: 0px;top: -44px; font-size: 15px;font-weight: bold;color: var(--main-color); background-color: white;padding: 2px;border-radius: 10% ;border: 0.5px solid #ccc;}
 
 /* skills section */
 
@@ -418,12 +461,12 @@ top: 49px;text-align: center;color: rgb(30, 12, 136);border-radius: 5%;
 .events .row img{width: 100%;}
 .events .holder .row{text-align: center;margin-bottom: 50px;}
 .events .holder .row {text-align: center;margin-bottom: 50px;}
-.events .row .input-holder{background-color: var(--section-color);padding: 20px;border-radius: 50px;}
-.events .row input{width: 50%;padding: 15px;border: 2px solid #777;border-radius: 50px;background-color: white;}
+.events .row .input-holder{ background-color: var(--section-color);padding: 20px;border-radius: 50px;}
+.events .row input{ width: 50%;padding: 15px;border: 2px solid #777;border-radius: 50px;background-color: white;}
 .events .row button{border-radius: 50px;font-size: 20px;height: 50px;}
 .events .dots-right{position: relative;}
 .events .dots-right img{position: absolute;right: 0px;justify-content: right;top: -100px;}
-.events .dots{position: relative;top: -100px;}
+.events .dots{position: relative;top: -100px;z-index: -1;}
 /* events */
 
 /* plans */
@@ -459,7 +502,7 @@ right: 0px;top: 30px;} */
 .advanced{position: absolute ;top: 0px; right: 20px;;writing-mode:vertical-rl ;font-weight: bold;color: white;
 background-color:var(--main-color);width: 40px;padding:  10px 10px 40px 10px;}
 .advanced::after{content: ""; position: absolute; width: 20px;height: 40px;right: 0px;bottom: 0px; border: solid;border-color: transparent transparent white;border-width: 20px;}
-.plans .dots{position: absolute;left: 0;bottom: 100px;z-index;}
+.plans .dots{position: absolute;left: 0;bottom: 100px;}
 /* .advanced p{position: absolute; right: 0px;;background-color: var(--main-color);align-content: center;} */
 /* plans */
 
@@ -503,7 +546,15 @@ background-color:var(--main-color);width: 40px;padding:  10px 10px 40px 10px;}
 /* reg-form */
 .reg-form{padding: 0px;}
 .reg-form .holder{text-align: center;background-image: url("../imgs/discount-background1.jpg")}
-.reg-form .holder .back-img{background-color: rgb(25 161 240/0.9);color:white ;padding: 20px;font-weight: bolder;}
+.reg-form .holder .back-img{background-color: rgba(25,161, 240,0.8);color:white ;padding: 20px;font-weight: bolder;}
 .reg-form img{width: 300px; height: 300px;}
 .reg-form .form-content{display: flex;gap: 20px;flex-direction: column;padding: 20px;text-align: center;justify-content: center;}
 /* reg-form */
+
+
+@media(max-width:992px){
+    .skills .holder{gap: 40px;}
+   .skills .bar-details p{top:-33px}
+   .skills .bar-details span{position: absolute; top:-30px;}
+   .dots,.dots-right{z-index: -1;}
+}
